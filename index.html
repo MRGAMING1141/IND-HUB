@@ -308,7 +308,7 @@
     <a class="btn btn-ghost" href="https://discord.gg/hp4wudc7pM" target="_blank" rel="noopener">Join Discord →</a>
   </div>
   <div class="stat-row">
-    <div class="stat"><b>4</b><span>Live Scripts</span></div>
+    <div class="stat"><b>16</b><span>Live Scripts</span></div>
     <div class="stat"><b>100%</b><span>Free Access</span></div>
     <div class="stat"><b>24/7</b><span>Discord Support</span></div>
   </div>
@@ -373,8 +373,9 @@
    desc  — the line under the heading
    code  — the loadstring people copy
 
-   NOTE: the four entries below are placeholders. The original list was lost
-   when the file got cut off, so drop your real loadstrings in here.
+   These are the live loadstrings — add, remove or edit entries here and
+   everything else on the page (tabs, panels, copy buttons, live count)
+   rebuilds itself automatically.
    ========================================================================== */
 var SCRIPTS = [
 {
@@ -690,6 +691,12 @@ var SCRIPTS = [
   toggle.setAttribute('role', 'button');
   toggle.setAttribute('tabindex', '0');
   toggle.setAttribute('aria-label', 'Toggle background music');
+
+  // If misery.mp3 isn't actually on the server, hide the toggle instead of
+  // leaving a button that silently does nothing when clicked.
+  audio.addEventListener('error', function () {
+    toggle.style.display = 'none';
+  });
 
   function sync()  { toggle.classList.toggle('paused', audio.paused); }
   function start() { var p = audio.play(); if (p) p.catch(function () {}); }
